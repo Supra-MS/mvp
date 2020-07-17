@@ -1,9 +1,21 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Nav from './Nav.js';
 
 class App extends React.Component {
   render() {
     return (
-      <div>Quick Notes</div>
+    <Router>
+      <div>
+        <Nav />
+        <div>
+          <Switch>
+            <Route exact path={""}></Route>
+          </Switch>
+        </div>
+
+      </div>
+    </Router>
     )
   }
 }
