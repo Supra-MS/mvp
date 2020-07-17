@@ -7,10 +7,6 @@ body {
   background-color: rgb(0, 78, 82)!important;
 }
 
-.container {
-  width: 84%;
-}
-
 a {
   color: white;
   margin: 7px;
@@ -23,10 +19,114 @@ a:hover {
   text-decoration: none;
 }
 
-a.nav-link {
-  color: rgb(226, 224, 224) !important;
+.container {
+  width: 85%;
 }
+
+.jumbotron {
+  background-color: white;
+}
+
+/* a.nav-link {
+  color: rgb(226, 224, 224) !important;
+} */
 
 a.nav-link:hover {
   color: aqua !important;
+}
+
+.successmsg {
+  color: green;
+}
+
+.form-control {
+  width: 40%;
+}
+
+.search {
+  position: relative;
+}
+.searchtext {
+  width: 30%;
+  text-indent: 10px;
+  color: rgb(87, 87, 87);
+}
+.search .fa-search {
+  position: absolute;
+  margin: 0px;
+  padding: 6px;
+  font-size: 20px;
+  color: white;
+  background: rgb(123, 33, 248);
+  border: 2px solid rgb(106, 0, 255);
+}
+
+.list {
+  margin-top: 20px;
+}
+
+.col-md-3 h5 {
+  margin: 10px;
+  color: white;
+}
+
+.col-md-3 {
+  padding: 20px;
+  border-radius: 7px;
+  margin: 20px 0px;
+  background-color: rgb(69, 104, 105);
+}
+
+.col-md-9 {
+  margin: 20px 0px;
+  background-color: rgb(242, 235, 235);
+}
+
+.list-group-item {
+  padding: 10px;
+}
+
+.list-group-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.3);
+  background-color: rgb(213, 232, 220);
+}
+
+.list-group-item.active {
+  transform: scale(1.04);
+  color: rgb(37, 37, 37)!important;
+  background-color: rgb(175, 203, 209)!important;
+  border-color: rgb(134, 196, 201)!important;
+}
+
+.fa-trash-o {
+  margin-left: 51px;
+  color: red;
+  background-color: inherit;
+}
+
+.currentTopic {
+  margin: 20px;
+}
+
+.btn-warning {
+  color: #212529;
+  background-color: #ffc107;
+  border-color: #ffc107;
+  padding: 10px;
+}
+
+.btn-warning:hover {
+  color: white!important;
+  background-color: #ffa407;
+  border-color: #ffc107;
+  padding: 10px;
+}
+
+textarea {
+  width: 80%!important;
+}
+
+.btn {
+  margin: 0px 10px;
 }

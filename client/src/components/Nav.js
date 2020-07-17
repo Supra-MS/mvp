@@ -10,7 +10,7 @@ function Nav(props) {
           <Link to={"/topics"} className="navbar-link">Topics</Link>
         </li>
         <li className="navbar-item">
-          <Link to={"/add"} className="navbar-link">Add-Topic</Link>
+          <Link to={"/add"} className="navbar-link">Add Topic</Link>
         </li>
         <li className="navbar-item">
           <Link to={"/quiz"} className="navbar-link">Quiz</Link>

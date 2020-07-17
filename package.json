@@ -5,9 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server/server.js",
-    "build": "webpack -d --watch",
-    "dev": "webpack-dev-server --open"
+    "start": "nodemon ./server/server.js",
+    "build": "webpack -d --open=8081 --watch",
+    "dev": "webpack-dev-server --open=8081"
   },
   "repository": {
     "type": "git",
@@ -24,7 +24,7 @@
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongoose": "^5.9.25",
+    "mongoose": "^5.9.24",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0"
