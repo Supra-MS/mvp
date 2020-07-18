@@ -55,7 +55,8 @@ class Quiz extends React.Component {
     this.setState({
       currentQuiz: 0,
       correctAnswers: [],
-      enablePlayAgain: false
+      enablePlayAgain: false,
+      finishedQuestions: []
     })
   }
 
