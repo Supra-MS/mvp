@@ -4,6 +4,7 @@ import Nav from './Nav.js';
 import AddTopic from './AddTopic.js';
 import TopicList from './TopicList.js';
 import TopicDetail from './TopicDetail.js';
+import Quiz from './Quiz.js';
 
 class App extends React.Component {
   render() {
@@ -16,6 +17,7 @@ class App extends React.Component {
               <Route exact path={["/", "/topics"]} component={TopicList} />
               <Route exact path="/add" component={AddTopic} />
               <Route path="/topics/:id" component={TopicDetail} />
+              <Route exact path="/quiz" component={Quiz} />
             </Switch>
           </div>
         </div>

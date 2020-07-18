@@ -6,6 +6,8 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const router = express.Router();
 const Topics = require('./models/topics.js');
+const Quiz = require('./models/quiz.js');
+const quizData = require('./data/quizData.js');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -123,6 +125,17 @@ router.put('/topics/:id', (req, res) => {
       message: `Error updating the topic by id`
     });
   });
-})
+});
+
+router.get('/quiz', (req, res) => {
+  Quiz.find({})
+  .then(data => {
+    console.log('Get quiz data: ', data);
+    res.send(data);
+  })
+  .catch(error => {
+   res.status(500).send({message: error.message || 'Error in retrieving the quiz data'});
+ })
+});
 
 app.listen(port, () => console.log(`*** Server is listening on http://localhost:${port} ***`));
