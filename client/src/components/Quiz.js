@@ -1,4 +1,5 @@
 import React from 'react';
+import QuizList from './QuizList.js';
 import http from '../../src/http-client-axios.js';
 
 class Quiz extends React.Component {
@@ -6,39 +7,70 @@ class Quiz extends React.Component {
     super(props);
     this.state = {
       quizData: [],
-      userAnswer: -1,
-      correctAnswer: false
+      currentQuiz: 0,
+      correctAnswers: [],
+      enablePlayAgain: false,
+      finishedQuestions: []
     }
     this.getQuizData = this.getQuizData.bind(this);
-    this.setAnswer = this.setAnswer.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
     this.getQuizData();
   }
 
-  setAnswer(correctAnswer, userAnswer) {
-    if (correctAnswer === userAnswer) {
-      /* this.setState({
-        correctAnswer: true
-      }) */
+  handleClick(answerIndex, bgColor) {
+    let { currentQuiz, quizData, correctAnswers, finishedQuestions } = this.state;
 
-      this.setState(prevState => {
-      console.log(prevState.userAnswer)
-      return {
-        correctAnswer: true
+    if (finishedQuestions.indexOf(currentQuiz) === -1) {
+      finishedQuestions.push(currentQuiz);
+      quizData[currentQuiz].answers[answerIndex].bgColor = bgColor;
+
+      if (bgColor === 'green') {
+        correctAnswers.push(currentQuiz);
       }
-    })
 
+      this.setState({ quizData: quizData, correctAnswers, finishedQuestions }, () => {
+        if (quizData.length - 1 > currentQuiz) {
+          setTimeout(() => {
+            this.setState({
+              currentQuiz: currentQuiz + 1
+            })
+          }, 1000);
+
+        } else {
+          console.log('Game over');
+          this.setState({
+            enablePlayAgain: true
+          })
+        }
+
+      })
     }
+  }
 
-
-    console.log('USer answer: ', this.state.userAnswer)
+  playAgain() {
+    this.getQuizData();
+    this.setState({
+      currentQuiz: 0,
+      correctAnswers: [],
+      enablePlayAgain: false
+    })
   }
 
   getQuizData() {
     http.get('/quiz')
       .then(response => {
+        response.data.map((question, i) => {
+          let customAnswers = [];
+          question.answers.map((ans, j) => {
+            let customStyle = {}
+            customAnswers.push({ answers: ans, bgColor: '' })
+          });
+          question.answers = customAnswers;
+        });
+
         this.setState({
           quizData: response.data
         })
@@ -50,39 +82,23 @@ class Quiz extends React.Component {
   }
 
   render() {
-    let { quizData, userAnswer } = this.state;
+    let { quizData, userAnswer, currentQuiz, correctAnswers } = this.state;
     return (
       <div className="jumbotron">
-        <div className="list row">
-          {quizData.length > 0 && quizData.map((eachQuiz, index) => {
-
-            return (
-                <div key={`ab${index + 90}`} className="col-md-10 quiz">
-                  <h6 style={{color: 'white', fontSize: "22px"}} >{eachQuiz.question}</h6>
-                  {eachQuiz.answers.map((option, optIndex) => {
-                    {/* console.log('opt: ',optIndex, option) */}
-                    return (
-
-                      <ul key={optIndex} className="list-group">
-                        <li className={`list-group-item ${this.state.correctAnswer ? "correct" : "incorrect"}`} onClick={()=>{
-                          console.log('Each quiz correct answer: ', eachQuiz.correctAnswer, '😇', 'Clicked ->', optIndex);
-                          // if ()
-                          this.setAnswer(eachQuiz.correctAnswer, optIndex)
-                        }} >{option}</li>
-                      </ul>
-                    )
-                  })}
-                </div>
-              )
-          })}
-
+      {!this.state.enablePlayAgain ?
+      <div>
+        {quizData.length ? <QuizList quizData={quizData} handleClick={this.handleClick} currentQuizIndex={currentQuiz} /> : null}
         </div>
-
+       :
+        <div style={{textAlign: 'center'}}>
+          <p style={{color: 'rgb(69, 104, 105)', fontSize: '30px'}}>{`You have got ${correctAnswers.length}/${quizData.length} Correct answers!!!`}</p>
+          <button className="btn-warning" onClick={this.playAgain.bind(this)}>Play Again</button>
+        </div>
+      }
       </div>
     )
   }
 }
-
 
 
 export default Quiz;

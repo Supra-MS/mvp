@@ -12,7 +12,7 @@ let quizData = [
     correctAnswer: 2
   },
   {
-    question: `With ES6, this is valid JavaScript:`,
+    question: `With ES6, this is valid JavaScript: { let a = 2, b, c; // .. }`,
     answers: ['True', 'False'],
     correctAnswer: 0
   },
@@ -42,3 +42,6 @@ let quizData = [
 ];
 
 module.exports = quizData;
+
+
+// you have answered 5/7 play again
